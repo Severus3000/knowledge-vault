@@ -31,7 +31,7 @@ export function ChatPanel({ fileContext }: ChatPanelProps) {
         setIsStreaming(false);
         return;
       }
-      if (data.type === "text" || data.type === "result") {
+      if (data.type === "text") {
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last && last.role === "assistant") {
@@ -43,6 +43,14 @@ export function ChatPanel({ fileContext }: ChatPanelProps) {
           return [...prev, { role: "assistant", content: data.content || "", timestamp: Date.now() }];
         });
       }
+    };
+
+    ws.onerror = () => {
+      setIsStreaming(false);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Connection error. Is the backend running on port 8000?", timestamp: Date.now() },
+      ]);
     };
 
     ws.onclose = () => {

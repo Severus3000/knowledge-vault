@@ -45,5 +45,6 @@ export async function ingestContent(body: {
 }
 
 export function createChatSocket(): WebSocket {
-  return new WebSocket("ws://localhost:8000/api/chat");
+  const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  return new WebSocket(`${wsProtocol}//${window.location.host}/api/chat`);
 }
