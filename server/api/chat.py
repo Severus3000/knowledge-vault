@@ -14,7 +14,7 @@ _sessions: dict[str, str] = {}  # connection_id -> agent session_id
 def detect_intent(message: str) -> str:
     """Detect whether the message is a URL, command, or question."""
     stripped = message.strip()
-    if URL_PATTERN.match(stripped):
+    if URL_PATTERN.fullmatch(stripped):
         return "ingest"
     if stripped.lower() in ("compile", "compile the vault", "compile vault"):
         return "compile"
