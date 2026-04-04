@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from server.config import VAULT_PATH
 from server.api.vault import init_router as init_vault
 from server.api.ingest import init_router as init_ingest
+from server.api.chat import init_router as init_chat
 
 
 def create_app(vault_path: Path | None = None) -> FastAPI:
@@ -23,6 +24,7 @@ def create_app(vault_path: Path | None = None) -> FastAPI:
 
     app.include_router(init_vault(vp))
     app.include_router(init_ingest(vp))
+    app.include_router(init_chat(vp))
 
     return app
 
