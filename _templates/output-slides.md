@@ -2,7 +2,7 @@
 marp: true
 title: "{{title}}"
 date: {{date}}
-vault_sources: []
+source_article: "[[{{article_path}}]]"
 tags: [slides]
 ---
 

@@ -6,6 +6,7 @@ author: "{{author}}"
 date: {{date}}
 ingested: {{ingested}}
 tags: []
+category: "{{category}}"
 compiled: false
 ---
 

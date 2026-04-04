@@ -1,7 +1,7 @@
 ---
 title: "Research: {{question}}"
 date: {{date}}
-vault_sources: []
+source_article: "[[{{article_path}}]]"
 tags: [research]
 ---
 
