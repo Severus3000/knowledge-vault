@@ -1,86 +1,43 @@
 # Knowledge Vault
 
-AI-powered personal knowledge base. Throw in links from WeChat, Xiaohongshu, X/Twitter, YouTube, Bilibili — an AI agent organizes them into a structured wiki you can chat with.
+Multi-vault personal knowledge base powered by Claude Code and viewed in Obsidian. Raw sources are ingested, compiled into a structured wiki by Claude Code, and operated on for Q&A, research, and output generation.
 
-Inspired by [Karpathy's LLM Knowledge Bases](https://x.com/karpathy) approach.
+Inspired by [Karpathy's LLM Knowledge Bases](https://x.com/karpathy/status/1936469592498032744) approach.
 
-## Quick Start
+## Setup
 
-### Prerequisites
+1. Open this folder as an Obsidian vault
+2. Install Obsidian community plugins: **Marp Slides**, **Dataview**
+3. Ensure [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is installed with `ANTHROPIC_API_KEY` set
+4. For PDF output: install [pandoc](https://pandoc.org/installing.html)
 
-- Python 3.10+
-- Node.js 18+
-- `ANTHROPIC_API_KEY` set in environment
+## Usage
 
-### Install
+Everything is done by prompting Claude Code in this directory:
 
-```bash
-# Backend
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-
-# Frontend
-cd web && npm install && cd ..
+```
+"Create a new vault for quantum computing"
+"Ingest https://arxiv.org/abs/... into the quantum-computing vault"
+"Compile the quantum-computing vault"
+"What do I know about entanglement? Check quantum-computing."
+"Create a Marp presentation on quantum gates from the quantum-computing vault"
+"Generate a PDF summary of my quantum-computing vault"
 ```
 
-### Run
-
-```bash
-# Terminal 1: Backend
-uvicorn server.main:app --reload --port 8000
-
-# Terminal 2: Frontend
-cd web && npm run dev
-```
-
-Open http://localhost:5173
-
-### CLI
-
-```bash
-vault status                                    # Vault stats
-vault search "MCP servers"                      # Search articles
-vault read wiki/concepts/ai.md                  # Read an article
-vault ask "What do I know about browser automation?"  # AI Q&A
-vault ingest "Title" "https://url" --content "# Markdown content"
-```
-
-### MCP Server (Claude Code integration)
-
-```bash
-claude mcp add knowledge-vault -- python -m server.mcp_server
-```
-
-Then in Claude Code: use `vault_search`, `vault_read`, `vault_ask`, `vault_index`, `vault_status`, `vault_ingest` tools.
-
-### Content Ingestion (web-access skill)
-
-Install the [web-access](https://github.com/eze-is/web-access) Claude Code skill for intelligent content extraction:
-
-```bash
-git clone https://github.com/eze-is/web-access.git ~/.claude/skills/web-access
-```
-
-Then in Claude Code, simply say: "Ingest this article into my vault: https://..." — web-access fetches and extracts the content, then calls `vault_ingest` to save it.
-
-Supports: WeChat articles, XHS posts, YouTube transcripts, Bilibili, blogs, and any web page.
-
-## Architecture
+## Structure
 
 ```
 knowledge-vault/
-├── server/          # Python FastAPI backend
-│   ├── agents/      # AI agents (compiler, researcher, ingester)
-│   ├── api/         # REST + WebSocket endpoints
-│   ├── services/    # Core services (vault_fs, index)
-│   ├── cli.py       # Click CLI
-│   └── mcp_server.py  # MCP server for Claude Code
-├── web/             # React + Vite frontend
-│   └── src/
-│       ├── components/  # Sidebar, ArticleViewer, ChatPanel, GraphView, StatusBar
-│       ├── api.ts       # API helpers
-│       └── types.ts     # Shared types
-└── vault/           # Knowledge storage (raw/, wiki/, outputs/)
+├── .obsidian/          # Obsidian config & plugins
+├── CLAUDE.md           # Instructions for Claude Code
+├── _templates/         # Markdown templates for all file types
+├── _meta/
+│   └── vaults.md       # Registry of all vaults
+├── <vault-name>/       # One per knowledge base
+│   ├── raw/            # Ingested sources + assets/
+│   ├── wiki/           # Compiled articles (_index.md, summaries/, concepts/)
+│   └── outputs/        # Research, slides, charts, PDFs
+└── ...more vaults
 ```
 
 ## License
