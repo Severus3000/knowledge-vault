@@ -56,7 +56,10 @@ knowledge-vault/
 1. Open this folder as an [Obsidian](https://obsidian.md) vault
 2. Recommended Obsidian community plugins: **Marp Slides**, **Dataview**
 3. Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and set `ANTHROPIC_API_KEY`
-4. Optional: install [pandoc](https://pandoc.org/installing.html) for PDF generation
+4. **Install the two required Claude Code skills** — see [`skills/README.md`](skills/README.md). The vault won't ingest or query correctly without them:
+   - [`knowledge-vault`](skills/knowledge-vault/) — teaches Claude how to ingest/query the vault from any working directory
+   - [`web-access`](skills/web-access/) — browser-based fetching for ingestion (handles login walls, JS-rendered pages)
+5. Optional: install [pandoc](https://pandoc.org/installing.html) for PDF generation
 
 ## Usage
 
