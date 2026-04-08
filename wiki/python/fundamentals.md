@@ -10,6 +10,7 @@ notes:
   - "[[python/dictionary.md]]"
   - "[[python/for-loop.md]]"
   - "[[python/exception-handling.md]]"
+  - "[[python/connection.md]]"
   - "[[python/decorator.md]]"
   - "[[python/generator-yield.md]]"
 tags: [python, agent-development, learning-notes]
@@ -44,6 +45,7 @@ The pattern at the heart of every agent: LLM returns a string tool name, you map
 LLM-driven systems fail in many places. Layered exception handling keeps the agent loop alive while still propagating useful information up.
 
 - [[python/exception-handling.md|Exception Handling]] — `try`/`except`/`finally`/`raise`, exception hierarchies, three-layer error model (tool → dispatch → agent loop bottom of stack)
+- [[python/connection.md|Connection]] — Database connections as a finite resource, the leak failure mode, why `finally` (and `with`) matters, connection pooling
 
 ## 5. Decorators
 

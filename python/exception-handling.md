@@ -71,7 +71,7 @@ return response.json()            # ✅ 返回结果
 
 ```python
 def query_database(sql):
-    conn = db.connect()              # 打开[[database/connection|数据库连接]]
+    conn = db.connect()              # 打开[[python/connection|数据库连接]]
     try:
         result = conn.execute(sql)
         return result
@@ -84,7 +84,7 @@ def query_database(sql):
 
 **`finally` = "不管怎样都执行"。** 用来清理资源（关连接、关文件）。
 
-为什么需要 finally？因为[[database/connection|数据库连接]]是有限资源——打开了必须关掉，不然连接会越积越多，最终数据库被占满。如果把 `conn.close()` 写在 try 里面，一旦出错就跳到 except 了，close 不会执行。`finally` 保证它一定跑。
+为什么需要 finally？因为[[python/connection|数据库连接]]是有限资源——打开了必须关掉，不然连接会越积越多，最终数据库被占满。如果把 `conn.close()` 写在 try 里面，一旦出错就跳到 except 了，close 不会执行。`finally` 保证它一定跑。
 
 ### raise — 主动抛异常
 
@@ -275,5 +275,5 @@ def execute_sql(sql):
 - [[for-loop]] — for 循环基础 + retry 中的循环逻辑
 - [[function]] — 函数基础
 - [[dictionary]] — KeyError 来自字典找不到 key
-- [[database/connection]] — 连接泄漏问题和 finally 的作用
+- [[connection]] — 连接泄漏问题和 finally 的作用
 - [[concurrency/threading]] — 线程中的异常处理
