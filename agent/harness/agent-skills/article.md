@@ -6,7 +6,7 @@ author: "阿里云开发者"
 date: 2026-03-31
 ingested: 2026-04-04T12:35:00Z
 tags: [agent-skills, anthropic, claude-code, skill-spec, reusable-knowledge, mcp, qoder-cli]
-compiled: false
+compiled: true
 category: "agent/harness"
 ---
 

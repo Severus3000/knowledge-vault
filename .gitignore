@@ -1,11 +1,17 @@
 # OS
 .DS_Store
 
-# Obsidian
+# Obsidian — local UI state
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+.obsidian/appearance.json
+.obsidian/core-plugins.json
+.obsidian/graph.json
 .obsidian/plugins/
 .obsidian/themes/
+
+# Empty Obsidian canvas scratch files
+Untitled*.canvas
 
 # Superpowers brainstorm sessions
 .superpowers/

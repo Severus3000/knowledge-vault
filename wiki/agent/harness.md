@@ -4,10 +4,12 @@ type: guide
 category: "agent/harness"
 created: 2026-04-04
 updated: 2026-04-04
+
 articles:
   - "[[agent/harness/agent-skills/article.md]]"
   - "[[agent/harness/qoder-harness/article.md]]"
-tags: [agent, harness, coding-agent, skills]
+  - "[[agent/harness/openclaw-self-iterating-agent/article.md]]"
+tags: [agent, harness, coding-agent, skills, openclaw, memory, self-iteration]
 ---
 
 # Agent Harness Engineering
@@ -27,3 +29,4 @@ Harness 工程是一套让 AI Agent 在代码仓库中可靠工作的方法论�
 
 - [[agent/harness/agent-skills/article.md]] — Agent Skills 标准：可复用专业领域知识的封装与生态
 - [[agent/harness/qoder-harness/article.md]] — Qoder Harness Engineering 实践指南：验证管道、上下文管理、反馈循环
+- [[agent/harness/openclaw-self-iterating-agent/article.md]] — OpenClaw 自我迭代 AI 助手实践：Cron+Heartbeat+Memory 三位一体、A2A 通信、Agent-Eval

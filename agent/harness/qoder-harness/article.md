@@ -6,7 +6,7 @@ author: "阿里云开发者"
 date: 2026-04-03
 ingested: 2026-04-04T12:30:00Z
 tags: [harness-engineering, agent, coding-agent, validation, lint, architecture, context-management]
-compiled: false
+compiled: true
 category: "agent/harness"
 ---
 

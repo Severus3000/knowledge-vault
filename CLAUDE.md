@@ -11,23 +11,37 @@ knowledge-vault/
 
   wiki/                       ← curated guides hub (top-level)
     <category>/
-      <sub-topic>.md          ← guide with links to articles
+      <sub-topic>.md          ← guide with links to articles or notes
 
-  <category>/                 ← top-level category (e.g. agent, master-courses)
-    <sub-topic>/              ← sub-topic (e.g. harness, stats-inference)
+  <category>/                 ← top-level category (e.g. agent, python, master-courses)
+
+    # Article series (ingested content)
+    <sub-topic>/
       <article-slug>/         ← article unit (atomic, minimal unit)
-        article.md            ← the ingested source
+        article.md            ← the ingested source (immutable)
         assets/               ← images, PDFs, media for this article
         slides.md             ← optional: generated Marp slides
         research.md           ← optional: Q&A output
         chart.png             ← optional: generated chart
+
+    # Note series (self-authored, mutable)
+    <series>/
+      <note-name>.md          ← a single note, freely cross-linked to siblings
+      <other-note>.md
+      learning-plan.md        ← optional: index/learning plan for the series
 ```
 
 ### Key Concepts
-- **Article unit** = the atomic unit. A folder containing `article.md` + `assets/` + optional outputs
-- **Categories** = pure organizational nesting (folders). Can be N levels deep
-- **Wiki** = top-level hub at `wiki/`. Mirrors category tree. Each file is a curated guide linking to articles
-- **`_meta/categories.md`** = tracks all categories with descriptions and article counts
+- **Article unit** = the atomic unit for *ingested* content. A folder containing `article.md` + `assets/` + optional outputs. Immutable once ingested.
+- **Note** = the unit for *self-authored* content (learning notes, study series). A flat `.md` file inside a series folder, freely cross-linked, mutable as you learn.
+- **Series** = a folder of related notes (e.g. `python/concurrency/`, `agent/learn-claude-code/`). The series IS the unit; individual notes within it are not standalone.
+- **Categories** = pure organizational nesting (folders). Can hold article units, note series, or both. N levels deep.
+- **Wiki** = top-level hub at `wiki/`. Mirrors category tree. Each file is a curated guide linking to either articles or notes.
+- **`_meta/categories.md`** = tracks all categories with type (articles/notes), descriptions, and counts
+
+### When to use which
+- Came from outside (you'd cite it): **article**. Goes in `<category>/<sub>/<slug>/article.md`.
+- You wrote it yourself as you learned: **note**. Goes in `<category>/<series>/<note-name>.md`.
 
 Shared directories:
 - `_templates/` — markdown templates for articles, wiki guides, outputs
@@ -59,17 +73,35 @@ compiled: false
 ---
 ```
 
+### Note (`<category>/<series>/<note-name>.md`)
+Notes are lightweight — minimal frontmatter, or none at all. When present:
+```yaml
+---
+title: "Note Title"
+type: note
+series: "category/series"
+updated: YYYY-MM-DD
+tags: [tag1, tag2]
+---
+```
+Filename = link target. `[[decorator]]` resolves vault-wide via Obsidian basename indexing. Notes can use short links (`[[function|函数]]`) without paths.
+
 ### Wiki Guide (`wiki/<category>/<sub-topic>.md`)
+A guide can list articles, notes, or both. Use whichever field applies:
 ```yaml
 ---
 title: "Guide: Topic Name"
 type: guide
 category: "category/sub-topic"
+kind: articles  # or "notes"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-articles:
+articles:       # use for ingested-article series
   - "[[category/sub/slug-a/article.md]]"
   - "[[category/sub/slug-b/article.md]]"
+notes:          # use for self-authored note series
+  - "[[category/series/note-a.md]]"
+  - "[[category/series/note-b.md]]"
 tags: [tag1, tag2]
 ---
 ```
@@ -88,7 +120,14 @@ tags: [research|slides|chart]
 
 1. Create the category folder: `<category>/<sub-topic>/`
 2. Create wiki guide: `wiki/<category>/<sub-topic>.md`
-3. Add entry to `_meta/categories.md`
+3. Add entry to `_meta/categories.md` (mark `kind` as `articles` or `notes`)
+
+## Workflow: Add a Note to a Series
+
+1. Pick or create the series folder: `<category>/<series>/`
+2. Save note as `<category>/<series>/<note-name>.md` — short slug, no `article.md` wrapper
+3. Update the wiki guide at `wiki/<category>/<series>.md` (add to `notes:` list + body)
+4. Bump the count in `_meta/categories.md`
 
 ## Workflow: Ingest a Source
 
